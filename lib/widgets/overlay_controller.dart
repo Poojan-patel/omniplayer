@@ -13,7 +13,7 @@ class OverlayController extends StatefulWidget {
 
 class _OverlayControllerState extends State<OverlayController> {
   double _speed = 1.0;
-  bool _triggered = false;
+  //bool _triggered = false;
   String showme = "";
   @override
   Widget build(BuildContext context) {

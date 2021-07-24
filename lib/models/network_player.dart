@@ -1,8 +1,9 @@
 import 'dart:io';
 
-import 'package:file_picker/file_picker.dart';
+//import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path_provider/path_provider.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:youtube_explode_dart/youtube_explode_dart.dart';
 //import 'package:video_player_in_flutter/main.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
@@ -14,8 +15,7 @@ class NetworkPlayer extends StatefulWidget {
   String path;
 
   NetworkPlayer(this.path, {Key? key}) : super(key: key) {
-    textController = TextEditingController(
-        text: 'https://www.youtube.com/watch?v=OBF4kZS9baw');
+    textController = TextEditingController(text: '');
   }
 
   @override
@@ -55,7 +55,7 @@ class _NetworkPlayerState extends State<NetworkPlayer> {
   Widget youtubePlayerCustom() {
     try {
       print(widget.url);
-      videoId = YoutubePlayer.convertUrlToId(widget.url);
+      videoId = YoutubePlayer.convertUrlToId(widget.url)!;
       setState(() {
         controller = YoutubePlayerController(
           initialVideoId: videoId,
@@ -129,11 +129,15 @@ class _NetworkPlayerState extends State<NetworkPlayer> {
                       ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(content: Text('Download Started')));
 
-                      getApplicationDocumentsDirectory().then((path) {
-                        //print(path);
-
-                        getVideo(path.path, videoId).then((value) {
-                          if (path == 'Some Error Occured') {
+                      //getApplicationDocumentsDirectory().then((Directory path) {
+                      //print(path);
+                      Permission.storage.status.then((status) async {
+                        if (!status.isGranted) {
+                          await Permission.storage.request();
+                        }
+                        String path = '/storage/emulated/0/Download/';
+                        getVideo(path, videoId).then((String value) {
+                          if (value == "Some Error Occured") {
                             setState(() {
                               savedLocation = "Failed to Download";
                             });
@@ -145,6 +149,8 @@ class _NetworkPlayerState extends State<NetworkPlayer> {
                           });
                         });
                       });
+
+                      //});
                     }
                   },
                   child: Icon(Icons.download)),

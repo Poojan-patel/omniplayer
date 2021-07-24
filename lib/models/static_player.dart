@@ -90,7 +90,7 @@ class _StaticPlayerState extends State<StaticPlayer> {
   dynamic pickVideoFile() async {
     final result = await FilePicker.platform.pickFiles(type: FileType.video);
     if (result == null) return null;
-    return File(result.files.single.path);
+    return File(result.files.single.path!);
     // return File(
     //     '/data/user/0/com.example.video_player_in_flutter/app_flutter/videodata.mp4');
   }

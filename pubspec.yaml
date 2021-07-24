@@ -28,25 +28,38 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  video_player: ^2.1.10
-  file_picker: ^2.1.5+1
-  path_provider: ^1.6.28
-  youtube_player_flutter: ^7.0.0+7
+
+  # Video Player to run Local Video
+  video_player: ^2.1.12
+
+  # File Picker to pick the file from local Storage
+  file_picker: ^3.0.3
+
+  # Path Provider, which provides path for storage in the android device
+  path_provider: ^2.0.2
+
+  # Youtube player, to play youtube videos
+  youtube_player_flutter: ^8.0.0
   # prevent screen from sleeping
   #wakelock: ^0.2.1+1
 
   # switch orientation
-  auto_orientation: 1.0.1
+  
 
   # listen to orientation
-  native_device_orientation: ^0.4.3
-  #file_manager: ^1.0.0
-  youtube_explode_dart: ^1.9.1
+  permission_handler: ^8.1.4+1
+  youtube_explode_dart: ^1.9.10
   
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_launcher_icons: ^0.9.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "icons/omniplayer-1.png"
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
